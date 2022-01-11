@@ -1,1 +1,34 @@
 # embulk、digdag、terraformのそれぞれのコンテナを立てる
+version: '3'
+
+services:
+  embulk_digdag:
+    build: .
+    container_name: embulk_digdag
+    volumes:
+      - .:/tmp/project
+    tty: true
+    env_file:
+      - ./secret/.env
+    environment:
+      TZ: Asia/Tokyo
+  terraform:
+    container_name: terraform
+    entrypoint: ash
+    image: hashicorp/terraform:latest
+    working_dir: /tmp/project
+    env_file:
+      - ./secret/.env
+    volumes:
+      - .:/tmp/project
+    tty: true
+  gcloud:
+    container_name: "gcloud"
+    entrypoint: "gcloud"
+    image: google/cloud-sdk:alpine
+    working_dir: /tmp/project
+    volumes:
+      - ./:/tmp/project:cached
+      - gcloud-config:/root/.config
+volumes:
+  gcloud-config:

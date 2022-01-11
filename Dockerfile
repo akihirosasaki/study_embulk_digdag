@@ -25,10 +25,4 @@ RUN wget -q https://dl.embulk.org/embulk-latest.jar -O /bin/embulk \
 RUN /bin/embulk gem install embulk-input-s3 embulk-output-bigquery
 
 # 実行ファイルのコピー
-COPY study_embulk_digdag_k8s/ /tmp/project/
-RUN chmod -R +x /tmp/project/shell/
-
-# 環境変数設定(必要に応じてデータベースの接続情報を環境変数に格納する)
-ENV GOOGLE_APPLICATION_CREDENTIALS "/tmp/project/secret/develop-test-k8s-asasaki.json"
-ENV AWS_ACCESS_KEY_ID ENV["access_key_id"]
-ENV AWS_SECRET_ACCESS_KEY ENV["secret_access_key"]
+COPY ./ /tmp/project/
