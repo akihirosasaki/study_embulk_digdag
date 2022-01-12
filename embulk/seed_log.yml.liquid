@@ -1,0 +1,25 @@
+in:
+  type: s3
+  bucket: asasaki-data-infra-s3
+  path_prefix: application
+  endpoint: s3-ap-northeast-1.amazonaws.com
+  access_key_id: {{ env.TF_VAR_AWS_ACCESS_KEY_ID }}
+  secret_access_key: {{ env.TF_VAR_AWS_SECRET_ACCESS_KEY }}
+out: 
+  type: bigquery
+  mode: append_direct
+  auth_method: json_key
+  json_keyfile: {{ env.TF_VAR_GOOGLE_APPLICATION_CREDENTIALS }}
+  project: {{ env.TF_VAR_gcp_project_id }}
+  dataset: asasaki_data_infra_dataset
+  table: asasaki_data_infra_table
+  auto_create_dataset: true
+  auto_create_table: true
+  schema_file: /tmp/project/bigquery/schema_asasaki-data-infra-table.json
+  column_options:
+  - {name: json_payload, type: string}
+  timeout_sec: 300
+  open_timeout_sec: 300
+  retries: 3
+  source_format: CSV
+  max_bad_records: 0
