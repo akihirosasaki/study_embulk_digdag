@@ -8,6 +8,7 @@ in:
 out: 
   type: bigquery
   mode: append_direct
+  location: asia-northeast1
   auth_method: json_key
   json_keyfile: {{ env.TF_VAR_GOOGLE_APPLICATION_CREDENTIALS }}
   project: {{ env.TF_VAR_gcp_project_id }}
