@@ -1,0 +1,17 @@
+timezone: Asia/Tokyo
+
+_export:
+  plugin:
+    repositories:
+      - https://jitpack.io
+    dependencies:
+      - com.github.szyn:digdag-slack:0.1.1
+  webhook_url: https://hooks.slack.com/services/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
+  workflow_name: s3_to_bigquery
+
+# ロード
++load:
+  _parallel: true
+  sh>: embulk run ../embulk/config_log.yml.liquid
+  _error:
+    slack>: failed-to-sync-table-template.yml

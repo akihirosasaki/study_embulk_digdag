@@ -356,3 +356,4 @@ secret/
 embulk/config_log.yml.liquid
 terraform.tfstate
 terraform.tfstate.backup
+.digdag/
