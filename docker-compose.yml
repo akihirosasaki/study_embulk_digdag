@@ -36,23 +36,23 @@ services:
     tty: true
     depends_on:
       - postgresql
-#   terraform:
-#     container_name: terraform
-#     entrypoint: ash
-#     image: hashicorp/terraform:latest
-#     working_dir: /tmp/project
-#     env_file:
-#       - ./secret/.env
-#     volumes:
-#       - .:/tmp/project
-#     tty: true
-#   gcloud:
-#     container_name: "gcloud"
-#     entrypoint: "gcloud"
-#     image: google/cloud-sdk:alpine
-#     working_dir: /tmp/project
-#     volumes:
-#       - ./:/tmp/project:cached
-#       - gcloud-config:/root/.config
-# volumes:
-#   gcloud-config:
+  terraform:
+    container_name: terraform
+    entrypoint: ash
+    image: hashicorp/terraform:latest
+    working_dir: /tmp/project
+    env_file:
+      - ./secret/.env
+    volumes:
+      - .:/tmp/project
+    tty: true
+  gcloud:
+    container_name: "gcloud"
+    entrypoint: "gcloud"
+    image: google/cloud-sdk:alpine
+    working_dir: /tmp/project
+    volumes:
+      - ./:/tmp/project:cached
+      - gcloud-config:/root/.config
+volumes:
+  gcloud-config:
