@@ -2,33 +2,57 @@
 version: '3'
 
 services:
-  embulk_digdag:
-    build: .
-    container_name: embulk_digdag
-    volumes:
-      - .:/tmp/project
-    tty: true
-    env_file:
-      - ./secret/.env
+  postgresql:
+    container_name: postgres
+    image: postgres:11.1
+    ports:
+      - "5432:5432"
     environment:
-      TZ: Asia/Tokyo
-  terraform:
-    container_name: terraform
-    entrypoint: ash
-    image: hashicorp/terraform:latest
-    working_dir: /tmp/project
-    env_file:
-      - ./secret/.env
+      POSTGRES_USER: postgresuser
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: digdag
+    command: 
+     - postgres
+     - -c
+     - superuser_reserved_connections=30
+     - -c
+     - max_connections=1000
+  digdag:
+    build:
+      context: .
+      args:
+        DB_USER: postgresuser
+        DB_PASSWORD: password
+        DB_HOST: postgresql
+        DB_PORT: 5432
+        DB_NAME: digdag
+        DIGDAG_ENCRYPTION_KEY: MdOyMzQ1NJc0oTAxMjM0PE==
+    ports:
+      - "65432:65432"
+      - "65433:65433"
+    container_name: digdag
     volumes:
-      - .:/tmp/project
+      - "./digdag/data:/var/data"
     tty: true
-  gcloud:
-    container_name: "gcloud"
-    entrypoint: "gcloud"
-    image: google/cloud-sdk:alpine
-    working_dir: /tmp/project
-    volumes:
-      - ./:/tmp/project:cached
-      - gcloud-config:/root/.config
-volumes:
-  gcloud-config:
+    depends_on:
+      - postgresql
+#   terraform:
+#     container_name: terraform
+#     entrypoint: ash
+#     image: hashicorp/terraform:latest
+#     working_dir: /tmp/project
+#     env_file:
+#       - ./secret/.env
+#     volumes:
+#       - .:/tmp/project
+#     tty: true
+#   gcloud:
+#     container_name: "gcloud"
+#     entrypoint: "gcloud"
+#     image: google/cloud-sdk:alpine
+#     working_dir: /tmp/project
+#     volumes:
+#       - ./:/tmp/project:cached
+#       - gcloud-config:/root/.config
+# volumes:
+#   gcloud-config:

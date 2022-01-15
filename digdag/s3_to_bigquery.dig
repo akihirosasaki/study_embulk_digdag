@@ -1,5 +1,8 @@
 timezone: Asia/Tokyo
 
+schedule:
+  daily>: 09:00:00
+  
 _export:
   plugin:
     repositories:
@@ -12,6 +15,6 @@ _export:
 # ロード
 +load:
   _parallel: true
-  sh>: embulk run ../embulk/config_log.yml.liquid
+  sh>: embulk run ./config_log.yml.liquid
   _error:
     slack>: failed-to-sync-table-template.yml
