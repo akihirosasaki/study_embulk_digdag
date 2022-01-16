@@ -18,12 +18,6 @@ ENV INSTALL_DIR=/usr/local/bin \
 # setup digdag server props
 COPY ./digdag/server.properties /etc/server.properties
 RUN envsubst < /etc/server.properties > /etc/server.properties
-
-# Installin docker client
-ENV DOCKER_CLIENT_VERSION=1.12.6 \
-    DOCKER_API_VERSION=1.24
-RUN curl -fsSL https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_CLIENT_VERSION}.tgz \
-  | tar -xzC /usr/local/bin --strip=1 docker/docker
  
 # digdag 本体をインストールする
 RUN curl -o ${INSTALL_DIR}/digdag --create-dirs -L "https://dl.digdag.io/digdag-latest" \ 
@@ -42,4 +36,4 @@ RUN embulk gem install embulk-input-s3 embulk-output-bigquery
 
 EXPOSE 65432 65433
 
-CMD ${INSTALL_DIR}/wait && digdag server --config /etc/server.properties --task-log /var/lib/digdag/logs/tasks -b 0.0.0.0
+CMD ${INSTALL_DIR}/wait && digdag server --config /etc/server.properties --task-log /var/lib/digdag/logs/tasks -b 0.0.0.0 --database digdag

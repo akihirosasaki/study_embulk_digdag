@@ -1,11 +1,13 @@
 version: '3.9'
 
 services:
-  postgresql:
+  postgres:
     container_name: postgres
     image: postgres:11.1
     ports:
       - "5432:5432"
+    volumes:
+     - data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgresuser
       POSTGRES_PASSWORD: password
@@ -23,7 +25,7 @@ services:
       args:
         DB_USER: postgresuser
         DB_PASSWORD: password
-        DB_HOST: postgresql
+        DB_HOST: 0.0.0.0
         DB_PORT: 5432
         DB_NAME: digdag
         DIGDAG_ENCRYPTION_KEY: MdOyMzQ1NJc0oTAxMjM0PE==
@@ -33,9 +35,10 @@ services:
     volumes:
       - "./digdag/data:/var/data"
       - "./bigquery:/var/bigquery"
+    working_dir: /var/data/
     tty: true
-    depends_on:
-      - postgresql
+    # depends_on:
+    #   - postgres
     secrets:
       - gcp_secret
     env_file:
@@ -63,6 +66,7 @@ services:
       - gcloud-config:/root/.config
 volumes:
   gcloud-config:
+  data:
 secrets:
   gcp_secret:
     file:
