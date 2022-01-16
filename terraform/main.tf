@@ -9,7 +9,7 @@ resource "google_bigquery_dataset" "bigquery_dataset" {
 resource "google_bigquery_table" "bigquery_table" {
   dataset_id          = google_bigquery_dataset.bigquery_dataset.dataset_id
   table_id            = "asasaki_data_infra_table"
-  schema              = file("./bigquery/schema_asasaki-data-infra-table.json")
+  schema              = file("../bigquery/schema_asasaki-data-infra-table.json")
   deletion_protection = false
 }
 

@@ -1,5 +1,4 @@
-# embulk、digdag、terraformのそれぞれのコンテナを立てる
-version: '3'
+version: '3.9'
 
 services:
   postgresql:
@@ -18,6 +17,7 @@ services:
      - -c
      - max_connections=1000
   digdag:
+    container_name: digdag
     build:
       context: .
       args:
@@ -30,22 +30,29 @@ services:
     ports:
       - "65432:65432"
       - "65433:65433"
-    container_name: digdag
     volumes:
       - "./digdag/data:/var/data"
+      - "./bigquery:/var/bigquery"
     tty: true
     depends_on:
       - postgresql
+    secrets:
+      - gcp_secret
+    env_file:
+      ./secret/.env
   terraform:
     container_name: terraform
     entrypoint: ash
     image: hashicorp/terraform:latest
-    working_dir: /tmp/project
-    env_file:
-      - ./secret/.env
+    working_dir: /tmp/terraform/
     volumes:
-      - .:/tmp/project
+      - ./terraform/:/tmp/terraform/
+      - ./bigquery/:/tmp/bigquery/
+    env_file:
+      ./secret/.env
     tty: true
+    secrets:
+      - gcp_secret
   gcloud:
     container_name: "gcloud"
     entrypoint: "gcloud"
@@ -56,3 +63,7 @@ services:
       - gcloud-config:/root/.config
 volumes:
   gcloud-config:
+secrets:
+  gcp_secret:
+    file:
+      ./secret/develop-test-k8s-asasaki.json

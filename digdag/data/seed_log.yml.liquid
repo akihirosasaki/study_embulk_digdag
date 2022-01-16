@@ -10,13 +10,13 @@ out:
   mode: append_direct
   location: asia-northeast1
   auth_method: json_key
-  json_keyfile: {{ env.TF_VAR_GOOGLE_APPLICATION_CREDENTIALS }}
+  json_keyfile: /run/secrets/gcp_secret
   project: {{ env.TF_VAR_gcp_project_id }}
   dataset: asasaki_data_infra_dataset
   table: asasaki_data_infra_table
   auto_create_dataset: true
   auto_create_table: true
-  schema_file: /tmp/project/bigquery/schema_asasaki-data-infra-table.json
+  schema_file: /var/bigquery/schema_asasaki-data-infra-table.json
   column_options:
   - {name: json_payload, type: string}
   timeout_sec: 300

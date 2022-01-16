@@ -42,4 +42,4 @@ RUN embulk gem install embulk-input-s3 embulk-output-bigquery
 
 EXPOSE 65432 65433
 
-CMD ${INSTALL_DIR}/wait && digdag server --config /etc/server.properties --task-log /var/lib/digdag/logs/tasks  -m -b 0.0.0.0
+CMD ${INSTALL_DIR}/wait && digdag server --config /etc/server.properties --task-log /var/lib/digdag/logs/tasks -b 0.0.0.0
