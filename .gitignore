@@ -353,6 +353,7 @@ MigrationBackup/
 secret/
 .terraform/
 .terraform.lock.hcl
+*.tfvars
 config_log.yml.liquid
 terraform.tfstate
 terraform.tfstate.backup

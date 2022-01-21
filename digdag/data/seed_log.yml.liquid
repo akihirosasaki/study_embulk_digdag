@@ -3,15 +3,15 @@ in:
   bucket: asasaki-data-infra-s3
   path_prefix: application
   endpoint: s3-ap-northeast-1.amazonaws.com
-  access_key_id: {{ env.TF_VAR_AWS_ACCESS_KEY_ID }}
-  secret_access_key: {{ env.TF_VAR_AWS_SECRET_ACCESS_KEY }}
+  access_key_id: {{ env.AWS_ACCESS_KEY_ID }}
+  secret_access_key: {{ env.AWS_SECRET_ACCESS_KEY }}
 out: 
   type: bigquery
   mode: append_direct
   location: asia-northeast1
   auth_method: json_key
   json_keyfile: /run/secrets/gcp_secret
-  project: {{ env.TF_VAR_gcp_project_id }}
+  project: {{ env.gcp_project_id }}
   dataset: asasaki_data_infra_dataset
   table: asasaki_data_infra_table
   auto_create_dataset: true

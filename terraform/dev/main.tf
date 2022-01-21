@@ -1,9 +1,8 @@
 # s3, bigqueryの環境構成を指定
-
 resource "google_bigquery_dataset" "bigquery_dataset" {
   dataset_id    = "asasaki_data_infra_dataset"
   friendly_name = "asasaki_data_infra_dataset"
-  location      = "asia-northeast1"
+  location      = "us-central1"
 }
 
 resource "google_bigquery_table" "bigquery_table" {
