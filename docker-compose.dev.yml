@@ -15,11 +15,12 @@ services:
      - -c
      - max_connections=1000
     env_file:
-      ./secret/.env
+      ./dev/.env.dev
   digdag:
     container_name: digdag
     build:
       context: .
+      dockerfile: ./dev/Dockerfile.dev
       args:
         DB_USER: postgresuser
         DB_PASSWORD: password
@@ -31,8 +32,7 @@ services:
       - "65432:65432"
       - "65433:65433"
     volumes:
-      - "./digdag/data:/var/data"
-      - "./bigquery:/var/bigquery"
+      - ./src/:/src/
     working_dir: /var/data/
     tty: true
     depends_on:
@@ -40,22 +40,22 @@ services:
     secrets:
       - gcp_secret
     env_file:
-      ./secret/.env
+      ./dev/.env.dev
   terraform:
     container_name: terraform
     entrypoint: ash
     image: hashicorp/terraform:latest
     working_dir: /tmp/terraform/
     volumes:
-      - ./terraform/dev/:/tmp/terraform/
-      - ./bigquery/:/tmp/bigquery/
+      - ./src/terraform/dev/:/tmp/terraform/
+      - ./src/bigquery/:/tmp/bigquery/
     env_file:
-      ./secret/.env
+      ./dev/.env.dev
     tty: true
     secrets:
       - gcp_secret
   gcloud:
-    container_name: "gcloud"
+    container_name: gcloud
     entrypoint: "gcloud"
     image: google/cloud-sdk:alpine
     working_dir: /tmp/project
@@ -68,4 +68,4 @@ volumes:
 secrets:
   gcp_secret:
     file:
-      ./secret/develop-test-k8s-asasaki.json
+      ./dev/dev_key.json

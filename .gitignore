@@ -356,5 +356,8 @@ secret/
 *.tfvars
 config_log.yml.liquid
 terraform.tfstate
-terraform.tfstate.backup
+*.backup
 .digdag/
+.env.*
+dev_key.json
+prod_key.json

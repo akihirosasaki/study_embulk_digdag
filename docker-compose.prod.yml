@@ -7,11 +7,11 @@ services:
     image: hashicorp/terraform:latest
     working_dir: /tmp
     volumes:
-      - ../terraform/prod/:/tmp/terraform/
-      - ../bigquery/:/tmp/bigquery/
+      - ./terraform/prod/:/tmp/terraform/
+      - ./src/bigquery/:/tmp/bigquery/
       - gcloud-config:/root/.config
     env_file:
-      ../secret/.env.prod
+      ./prod/.env.prod
     tty: true
     secrets:
       - gcp_secret
@@ -29,4 +29,4 @@ volumes:
 secrets:
   gcp_secret:
     file:
-      ../secret/develop-test-k8s-asasaki.json
+      ./prod/env.prod
