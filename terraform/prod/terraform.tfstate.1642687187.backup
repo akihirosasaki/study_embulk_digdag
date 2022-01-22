@@ -1,0 +1,278 @@
+{
+  "version": 4,
+  "terraform_version": "1.1.3",
+  "serial": 28,
+  "lineage": "215351fd-9e6a-4884-3724-d0f91b70e3f0",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "s3_bucket",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": "private",
+            "arn": "arn:aws:s3:::asasaki-data-infra-s3",
+            "bucket": "asasaki-data-infra-s3",
+            "bucket_domain_name": "asasaki-data-infra-s3.s3.amazonaws.com",
+            "bucket_prefix": null,
+            "bucket_regional_domain_name": "asasaki-data-infra-s3.s3.ap-northeast-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": false,
+            "grant": [],
+            "hosted_zone_id": "Z2M4EHUR26P7ZW",
+            "id": "asasaki-data-infra-s3",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "policy": null,
+            "region": "ap-northeast-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [],
+            "tags": {},
+            "tags_all": {},
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_bigquery_dataset",
+      "name": "bigquery_dataset",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "access": [
+              {
+                "domain": "",
+                "group_by_email": "",
+                "role": "OWNER",
+                "special_group": "",
+                "user_by_email": "develop@test-k8s-asasaki.iam.gserviceaccount.com",
+                "view": []
+              },
+              {
+                "domain": "",
+                "group_by_email": "",
+                "role": "OWNER",
+                "special_group": "projectOwners",
+                "user_by_email": "",
+                "view": []
+              },
+              {
+                "domain": "",
+                "group_by_email": "",
+                "role": "READER",
+                "special_group": "projectReaders",
+                "user_by_email": "",
+                "view": []
+              },
+              {
+                "domain": "",
+                "group_by_email": "",
+                "role": "WRITER",
+                "special_group": "projectWriters",
+                "user_by_email": "",
+                "view": []
+              }
+            ],
+            "creation_time": 1641996368783,
+            "dataset_id": "asasaki_data_infra_dataset",
+            "default_encryption_configuration": [],
+            "default_partition_expiration_ms": 0,
+            "default_table_expiration_ms": 0,
+            "delete_contents_on_destroy": false,
+            "description": "",
+            "etag": "52W19HrqrFe+O8vIqSgWpg==",
+            "friendly_name": "asasaki_data_infra_dataset",
+            "id": "projects/test-k8s-asasaki/datasets/asasaki_data_infra_dataset",
+            "labels": {},
+            "last_modified_time": 1641996368783,
+            "location": "asia-northeast1",
+            "project": "test-k8s-asasaki",
+            "self_link": "https://bigquery.googleapis.com/bigquery/v2/projects/test-k8s-asasaki/datasets/asasaki_data_infra_dataset",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoyNDAwMDAwMDAwMDAsImRlbGV0ZSI6MjQwMDAwMDAwMDAwLCJ1cGRhdGUiOjI0MDAwMDAwMDAwMH19"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_bigquery_table",
+      "name": "bigquery_table",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "clustering": null,
+            "creation_time": 1641996370907,
+            "dataset_id": "asasaki_data_infra_dataset",
+            "deletion_protection": false,
+            "description": "",
+            "encryption_configuration": [],
+            "etag": "EdB38sb3DJXlP5/7ghjcPQ==",
+            "expiration_time": 0,
+            "external_data_configuration": [],
+            "friendly_name": "",
+            "id": "projects/test-k8s-asasaki/datasets/asasaki_data_infra_dataset/tables/asasaki_data_infra_table",
+            "labels": {},
+            "last_modified_time": 1642507415691,
+            "location": "asia-northeast1",
+            "materialized_view": [],
+            "num_bytes": 305998,
+            "num_long_term_bytes": 0,
+            "num_rows": 7000,
+            "project": "test-k8s-asasaki",
+            "range_partitioning": [],
+            "schema": "[{\"mode\":\"REQUIRED\",\"name\":\"timestamp\",\"type\":\"TIMESTAMP\"},{\"mode\":\"REQUIRED\",\"name\":\"user_id\",\"type\":\"STRING\"},{\"mode\":\"REQUIRED\",\"name\":\"state_id\",\"type\":\"STRING\"},{\"mode\":\"NULLABLE\",\"name\":\"items\",\"type\":\"STRING\"},{\"mode\":\"REQUIRED\",\"name\":\"state_name\",\"type\":\"STRING\"}]",
+            "self_link": "https://bigquery.googleapis.com/bigquery/v2/projects/test-k8s-asasaki/datasets/asasaki_data_infra_dataset/tables/asasaki_data_infra_table",
+            "table_id": "asasaki_data_infra_table",
+            "time_partitioning": [],
+            "type": "TABLE",
+            "view": []
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "google_bigquery_dataset.bigquery_dataset"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_compute_global_address",
+      "name": "private_ip_address",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address": "10.9.0.0",
+            "address_type": "INTERNAL",
+            "creation_timestamp": "2022-01-16T06:20:31.895-08:00",
+            "description": "",
+            "id": "projects/test-k8s-asasaki/global/addresses/private-ip-address",
+            "ip_version": "",
+            "name": "private-ip-address",
+            "network": "https://www.googleapis.com/compute/v1/projects/test-k8s-asasaki/global/networks/private-network",
+            "prefix_length": 16,
+            "project": "test-k8s-asasaki",
+            "purpose": "VPC_PEERING",
+            "self_link": "https://www.googleapis.com/compute/v1/projects/test-k8s-asasaki/global/addresses/private-ip-address",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoyNDAwMDAwMDAwMDAsImRlbGV0ZSI6MjQwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "google_compute_network.private_network"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_compute_network",
+      "name": "private_network",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "auto_create_subnetworks": true,
+            "delete_default_routes_on_create": false,
+            "description": "",
+            "gateway_ipv4": "",
+            "id": "projects/test-k8s-asasaki/global/networks/private-network",
+            "mtu": 0,
+            "name": "private-network",
+            "project": "test-k8s-asasaki",
+            "routing_mode": "REGIONAL",
+            "self_link": "https://www.googleapis.com/compute/v1/projects/test-k8s-asasaki/global/networks/private-network",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoyNDAwMDAwMDAwMDAsImRlbGV0ZSI6MjQwMDAwMDAwMDAwLCJ1cGRhdGUiOjI0MDAwMDAwMDAwMH19"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_service_networking_connection",
+      "name": "private_vpc_connection",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "projects%2Ftest-k8s-asasaki%2Fglobal%2Fnetworks%2Fprivate-network:servicenetworking.googleapis.com",
+            "network": "projects/test-k8s-asasaki/global/networks/private-network",
+            "peering": "servicenetworking-googleapis-com",
+            "reserved_peering_ranges": [
+              "private-ip-address"
+            ],
+            "service": "servicenetworking.googleapis.com",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "google_compute_global_address.private_ip_address",
+            "google_compute_network.private_network"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "google_sql_user",
+      "name": "users",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "deletion_policy": null,
+            "host": "",
+            "id": "postgresuser//digdag",
+            "instance": "digdag",
+            "name": "postgresuser",
+            "password": "postgresuserpassword",
+            "project": "test-k8s-asasaki",
+            "timeouts": null,
+            "type": ""
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "google_compute_global_address.private_ip_address",
+            "google_compute_network.private_network",
+            "google_service_networking_connection.private_vpc_connection",
+            "google_sql_database_instance.postgres"
+          ]
+        }
+      ]
+    }
+  ]
+}

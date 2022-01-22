@@ -23,7 +23,7 @@ ENV INSTALL_DIR=/usr/local/bin \
     JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
  
 # setup digdag server props
-COPY ./digdag/server.properties /etc/server.properties
+COPY ./server.properties /etc/server.properties
 RUN envsubst < /etc/server.properties > /etc/server.properties
  
 # digdag 本体をインストールする
@@ -41,9 +41,10 @@ RUN chmod 755 ${INSTALL_DIR}/wait
 # 使いたいプラグインを入れる(embulk-input-mysqlなど)
 RUN embulk gem install embulk-input-s3 embulk-output-bigquery
 
-COPY ./digdag/data/ /tmp/digdag/
+COPY ../digdag/data/ /tmp/digdag/
+COPY ./digdag_start.sh /tmp/digdag_start.sh
 
 EXPOSE 65432 65433
 
-CMD ${INSTALL_DIR}/wait && digdag server --config /etc/server.properties --task-log /var/lib/digdag/logs/tasks -b 0.0.0.0 --database digdag \
-  && ${INSTALL_DIR}/wait && digdag push --project /tmp/digdag/
+CMD ["/tmp/digdag_start.sh"]
+

@@ -2,28 +2,26 @@ version: '3.9'
 
 services:
   terraform:
-    container_name: terraform
+    container_name: terraform_prod
     entrypoint: ash
     image: hashicorp/terraform:latest
     working_dir: /tmp
     volumes:
-      - ./terraform/prod/:/tmp/terraform/
-      - ./bigquery/:/tmp/bigquery/
-      - ./Dockerfile.prod:/tmp/Dockerfile/
-      - ./digdag/server.properties:/tmp/server.properties/
+      - ../terraform/prod/:/tmp/terraform/
+      - ../bigquery/:/tmp/bigquery/
       - gcloud-config:/root/.config
     env_file:
-      ./secret/.env.prod
+      ../secret/.env.prod
     tty: true
     secrets:
       - gcp_secret
   gcloud:
-    container_name: "gcloud"
+    container_name: gcloud_prod
     entrypoint: "gcloud"
     image: google/cloud-sdk:alpine
     working_dir: /tmp
     volumes:
-      - ./:/tmp:cached
+      - ../:/tmp:cached
       - gcloud-config:/root/.config
     tty: true
 volumes:
@@ -31,4 +29,4 @@ volumes:
 secrets:
   gcp_secret:
     file:
-      ./secret/develop-test-k8s-asasaki.json
+      ../secret/develop-test-k8s-asasaki.json
