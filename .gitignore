@@ -356,6 +356,7 @@ secret/
 *.tfvars
 config_log.yml.liquid
 terraform.tfstate
+terraform.tfstate.*
 *.backup
 .digdag/
 .env.*
