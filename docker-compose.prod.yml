@@ -5,13 +5,13 @@ services:
     container_name: terraform
     entrypoint: ash
     image: hashicorp/terraform:latest
-    working_dir: /tmp/
+    working_dir: /tmp
     volumes:
       - ./terraform/prod/:/tmp/terraform/
       - ./bigquery/:/tmp/bigquery/
       - ./Dockerfile.prod:/tmp/Dockerfile/
       - ./digdag/server.properties:/tmp/server.properties/
-      - ~/.config/gcloud:/root/.config/gcloud
+      - gcloud-config:/root/.config
     env_file:
       ./secret/.env.prod
     tty: true
@@ -21,10 +21,11 @@ services:
     container_name: "gcloud"
     entrypoint: "gcloud"
     image: google/cloud-sdk:alpine
-    working_dir: /tmp/project
+    working_dir: /tmp
     volumes:
-      - ./:/tmp/project:cached
+      - ./:/tmp:cached
       - gcloud-config:/root/.config
+    tty: true
 volumes:
   gcloud-config:
 secrets:

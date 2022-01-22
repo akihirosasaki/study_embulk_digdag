@@ -52,6 +52,7 @@ resource "google_vpc_access_connector" "vpc_connector" {
   name = "digdag-connector"
   ip_cidr_range = "10.14.0.0/28"
   network = google_compute_network.private_network.name
+  region = "us-central1"
 }
 
 # resource "google_cloud_run_service" "service" {
